@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-
 function App() {
-  const [count, setCount] = useState(0);
+  const [length, setLength] = useState(8);
 
   return (
     <>
@@ -28,7 +27,7 @@ function App() {
             color: "rgb(82, 146, 215)",
           }}
         >
-          <input type="range" name="length" id="range" />
+          <input type="range" name="length" id="range" onInput={generateCode} />
           <label htmlFor="range">Length</label>
           <input type="checkbox" name="numberAllowed" id="number" />
           <label htmlFor="number">Include Numbers</label>
@@ -38,6 +37,22 @@ function App() {
       </div>
     </>
   );
+  function generateCode() {
+    console.log("length: ", length);
+    const input = document.querySelector('input[type="text"]');
+    // const alpha = String.fromCharCode(Math.floor(Math.random() * 58 + 65));
+    const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    const alphanum = alpha + "0123456789";
+    let code = "";
+    const useNum = true;
+
+    for (let i = 0; i <= length; i++) {
+      code += useNum
+        ? alphanum[Math.floor(Math.random() * alphanum.length + 1)]
+        : alpha[Math.floor(Math.random() * alpha.length + 1)];
+    }
+    input.value = code;
+  }
 }
 
 export default App;
