@@ -2,9 +2,6 @@ import { useId } from "react";
 function InputBox({
   label,
   amount,
-  convertedAmount,
-  from = "usd",
-  to = "inr",
   selectCurrency = "usd",
   onAmountChange,
   onCurrencyChange,

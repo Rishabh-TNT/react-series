@@ -1,26 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import InputBox from "./InputBox";
+import useCurrencyInfo from "./customhooks/usecurrencyinfo";
 
 function App() {
   const [amount, setAmount] = useState(0);
   const [convertedAmount, setConvertedAmount] = useState(0);
   const [from, setFrom] = useState("usd");
   const [to, setTo] = useState("inr");
-  const [data, setData] = useState({});
 
-  const currencyInfo = (currency) => {
-    useEffect(() => {
-      fetch(
-        `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency}.json`,
-      )
-        .then((r) => r.json())
-        .then((j) => setData(j[currency]));
-    }, [from]);
-    console.log("inside currencyInfo", data);
-  };
-
-  currencyInfo(from);
+  const data = useCurrencyInfo(from);
 
   return (
     <div
